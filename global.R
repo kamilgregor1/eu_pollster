@@ -39,7 +39,7 @@ psp_poll_types_selected <- psp_poll_types[which(psp_poll_types$selected == 1), c
 
 data_identifiers <- strsplit(original_data$id, "_")
 data_identifiers <- sapply(data_identifiers, function(x) {x[c(1:7)]})
-data_identifiers <- data.frame(t(data_identifiers))
+data_identifiers <- data.frame(t(data_identifiers), stringsAsFactors = FALSE)
 
 data <- original_data
 data$date <- data_identifiers$X2
@@ -113,9 +113,15 @@ end_date <- sapply(end_date, function(x) {x[c(1:3)]})
 end_date <- apply(end_date, 1, function(x) {as.numeric(x)})
 end_date <- paste0(end_date[, 3], ". ", end_date[, 2], ". ", end_date[, 1])
 
+midpoint <- strsplit(data$date, "-")
+midpoint <- sapply(midpoint, function(x) {x[c(1:3)]})
+midpoint <- apply(midpoint, 1, function(x) {as.numeric(x)})
+midpoint <- paste0(midpoint[, 3], ". ", midpoint[, 2], ". ", midpoint[, 1])
+
 data$start_date_tooltip <- start_date
 data$end_date_tooltip <- end_date
-data$psp_votes_tooltip <- paste0("<strong>Politická strana:</strong> ", data$name.y, "<br><strong>Podíl hlasů:</strong> ", round(data$percentage * 100, digits = 1), "%<br><strong>80% interval spolehlivosti:</strong> ", round(data$lower_interval * 100, digits = 1), "% - ", round(data$upper_interval * 100, digits = 1), "%<br>", paste0(replicate(85, "&nbsp;"), collapse = ""), "<br><strong>Průzkum:</strong> ", data$name.x, "<br><strong>Datum dotazování:</strong> ", data$start_date_tooltip, " - ", data$end_date_tooltip, "<br><strong>Počet respondentů:</strong> ", data$sample)
+data$midpoint <- midpoint
+data$psp_votes_tooltip <- paste0("<strong>Politická strana:</strong> ", data$name.y, "<br><strong>Podíl hlasů:</strong> ", round(data$percentage * 100, digits = 1), "%<br><strong>80% interval spolehlivosti:</strong> ", round(data$lower_interval * 100, digits = 1), "% - ", round(data$upper_interval * 100, digits = 1), "%<br>", paste0(replicate(85, "&nbsp;"), collapse = ""), "<br><strong>Průzkum:</strong> ", data$name.x, "<br><strong>Datum dotazování:</strong> ", data$start_date_tooltip, " - ", data$end_date_tooltip, "<br><strong>Střední den dotazování:</strong> ", data$midpoint, "<br><strong>Počet respondentů:</strong> ", data$sample)
 
 psp_votes_tooltip <- acast(data, date ~ column_name, fun.aggregate = NULL, value.var = "psp_votes_tooltip")
 psp_votes_tooltip <- data.frame(psp_votes_tooltip)
