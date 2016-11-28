@@ -5,7 +5,7 @@ fluidPage(
               tabPanel("Sněmovní volby 2017",
                        tabsetPanel(type = "tabs", 
                                    tabPanel("Podíl hlasů",
-                                            h4("Jaký je aktuální podíl hlasů pro stranu?"),
+                                            h3("Jaký je aktuální podíl hlasů pro stranu?"),
                                             sidebarLayout(
                                               sidebarPanel(
                                                 actionButton(inputId = "psp_votes_update", label = "Aktualizovat graf"),
@@ -48,7 +48,7 @@ fluidPage(
                                             )
                                             ),
                                    tabPanel("Šance vítězství",
-                                            h4("Jaká je pravděpodobnost, že strana získá nejvíce hlasů?"),
+                                            h3("Jaká je pravděpodobnost, že strana získá nejvíce hlasů?"),
                                             sidebarLayout(
                                               sidebarPanel(
                                                 actionButton(inputId = "psp_victor_update", label = "Aktualizovat graf"),
@@ -82,7 +82,7 @@ fluidPage(
                                             )
                                             ),
                                    tabPanel("Šance vstupu do Sněmovny",
-                                            h4("Jaká je pravděpodobnost, že se strana dostane do Sněmovny?"),
+                                            h3("Jaká je pravděpodobnost, že se strana dostane do Sněmovny?"),
                                             sidebarLayout(
                                               sidebarPanel(
                                                 actionButton(inputId = "psp_threshold_update", label = "Aktualizovat graf"),
@@ -120,10 +120,10 @@ fluidPage(
               tabPanel("Prezidentské volby 2018",
                        tabsetPanel(type = "tabs", 
                                    tabPanel("Podíl hlasů",
-                                            h4("Tato data Vám nabídneme po prvním průzkumu")
+                                            h3("Tato data Vám nabídneme po prvním průzkumu")
                                    ),
                                    tabPanel("Šance vítězství v 1. kole",
-                                            h4("Tato data Vám nabídneme po prvním průzkumu")
+                                            h3("Tato data Vám nabídneme po prvním průzkumu")
                                    )
                        )
                        ),

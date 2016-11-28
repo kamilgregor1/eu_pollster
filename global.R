@@ -121,7 +121,7 @@ midpoint <- paste0(midpoint[, 3], ". ", midpoint[, 2], ". ", midpoint[, 1])
 data$start_date_tooltip <- start_date
 data$end_date_tooltip <- end_date
 data$midpoint <- midpoint
-data$psp_votes_tooltip <- paste0("<strong>Politická strana:</strong> ", data$name.y, "<br><strong>Podíl hlasů:</strong> ", round(data$percentage * 100, digits = 1), "%<br><strong>80% interval spolehlivosti:</strong> ", round(data$lower_interval * 100, digits = 1), "% - ", round(data$upper_interval * 100, digits = 1), "%<br>", paste0(replicate(85, "&nbsp;"), collapse = ""), "<br><strong>Průzkum:</strong> ", data$name.x, "<br><strong>Datum dotazování:</strong> ", data$start_date_tooltip, " - ", data$end_date_tooltip, "<br><strong>Střední den dotazování:</strong> ", data$midpoint, "<br><strong>Počet respondentů:</strong> ", data$sample)
+data$psp_votes_tooltip <- paste0("<strong>Politická strana:</strong> ", data$name.y, "<br><strong>Podíl hlasů:</strong> ", round(data$percentage * 100, digits = 1), " %<br><strong>80% interval spolehlivosti:</strong> ", round(data$lower_interval * 100, digits = 1), " % - ", round(data$upper_interval * 100, digits = 1), " %<br>", paste0(replicate(85, "&nbsp;"), collapse = ""), "<br><strong>Průzkum:</strong> ", data$name.x, "<br><strong>Datum dotazování:</strong> ", data$start_date_tooltip, " - ", data$end_date_tooltip, "<br><strong>Střední den dotazování:</strong> ", data$midpoint, "<br><strong>Počet respondentů:</strong> ", data$sample)
 
 psp_votes_tooltip <- acast(data, date ~ column_name, fun.aggregate = NULL, value.var = "psp_votes_tooltip")
 psp_votes_tooltip <- data.frame(psp_votes_tooltip)
