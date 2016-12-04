@@ -1,5 +1,9 @@
 # global
 
+## set parameters
+
+beginning <- Sys.Date()-365 # a date from which the 4G function is calculated
+
 ## read libraries
 
 library(googleVis)
@@ -120,8 +124,8 @@ midpoint <- paste0(midpoint[, 3], ". ", midpoint[, 2], ". ", midpoint[, 1])
 
 data$start_date_tooltip <- start_date
 data$end_date_tooltip <- end_date
-data$midpoint <- midpoint
-data$psp_votes_tooltip <- paste0("<strong>Politická strana:</strong> ", data$name.y, "<br><strong>Podíl hlasů:</strong> ", round(data$percentage * 100, digits = 1), " %<br><strong>80% interval spolehlivosti:</strong> ", round(data$lower_interval * 100, digits = 1), " % - ", round(data$upper_interval * 100, digits = 1), " %<br>", paste0(replicate(85, "&nbsp;"), collapse = ""), "<br><strong>Průzkum:</strong> ", data$name.x, "<br><strong>Datum dotazování:</strong> ", data$start_date_tooltip, " - ", data$end_date_tooltip, "<br><strong>Střední den dotazování:</strong> ", data$midpoint, "<br><strong>Počet respondentů:</strong> ", data$sample)
+data$midpoint_tooltip <- midpoint
+data$psp_votes_tooltip <- paste0("<strong>Politická strana:</strong> ", data$name.y, "<br><strong>Podíl hlasů:</strong> ", round(data$percentage * 100, digits = 1), " %<br><strong>80% interval spolehlivosti:</strong> ", round(data$lower_interval * 100, digits = 1), " % - ", round(data$upper_interval * 100, digits = 1), " %<br>", paste0(replicate(85, "&nbsp;"), collapse = ""), "<br><strong>Průzkum:</strong> ", data$name.x, "<br><strong>Datum dotazování:</strong> ", data$start_date_tooltip, " - ", data$end_date_tooltip, "<br><strong>Střední den dotazování:</strong> ", data$midpoint_tooltip, "<br><strong>Počet respondentů:</strong> ", data$sample)
 
 psp_votes_tooltip <- acast(data, date ~ column_name, fun.aggregate = NULL, value.var = "psp_votes_tooltip")
 psp_votes_tooltip <- data.frame(psp_votes_tooltip)
@@ -136,3 +140,7 @@ psp_votes_provisional <- cbind(psp_votes_provisional, psp_votes_tooltip)
 psp_votes <- psp_votes_provisional[c("date", rbind(names(psp_votes)[2:ncol(psp_votes)], names(psp_votes_interval), names(psp_votes_lower_interval), names(psp_votes_upper_interval), names(psp_votes_tooltip)))]
 
 rm(psp_votes_provisional, psp_votes_interval, psp_votes_lower_interval, psp_votes_upper_interval)
+
+# implement the 4G function
+
+# source("4g.R")
